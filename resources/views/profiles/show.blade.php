@@ -8,15 +8,18 @@
         </div>
 
         <div class="col-9 pt-5">
-            <div><h2>{{ $user->username }}</h2></div>
+            <div class="d-flex justify-content-between ">
+                <h2>{{ $user->username }}</h2>
+                <a href="">Add new post</a>
+            </div>
             <div class="d-flex" >
                 <div class="pr-4"><strong>15</strong> posts</div>
                 <div class="pr-4"><strong>655</strong> followers</div>
                 <div class="pr-4"><strong>703</strong> following</div>
             </div>
-            <div class="pt-4 font-weight-bold">Semih Arslanoğlu</div>
-            <div>Hey there! I'm not using Instagram. Please contact me via other platforms</div>
-            <div><a href="#">https://github.com/sarslanoglu</a></div>
+            <div class="pt-4 font-weight-bold">{{ $user->profile->title }}</div>
+            <div>{{ $user->profile->description }}</div>
+            <div><a href="#">{{ $user->profile->url }}</a></div>
         </div>
     </div>
 
