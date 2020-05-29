@@ -10,10 +10,17 @@
         <div class="col-9 pt-5">
             <div class="d-flex justify-content-between ">
                 <h2>{{ $user->username }}</h2>
-                <a href="">Add new post</a>
+                @can('update', $user->profile)
+                    <a href="/posts/create">Add new post</a>
+                @endcan
             </div>
-            <div class="d-flex" >
-                <div class="pr-4"><strong>15</strong> posts</div>
+
+            @can('update', $user->profile)
+                <a href="/profile/{{ $user-> id }}/edit">Edit profile</a>
+            @endcan
+
+            <div class="d-flex">
+                <div class="pr-4"><strong>{{ $user->posts->count() }}</strong> posts</div>
                 <div class="pr-4"><strong>655</strong> followers</div>
                 <div class="pr-4"><strong>703</strong> following</div>
             </div>
@@ -23,16 +30,14 @@
         </div>
     </div>
 
-    <div class="row pt-4">
-        <div class="col-4">
-            <img src="https://instagram.fist4-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/c55.0.969.969a/s640x640/66645033_104370810817547_8701499162627471864_n.jpg?_nc_ht=instagram.fist4-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=iOvJN44EsxYAX_O-Q7h&oh=c32d52f6cb585f05ba09bcd120777ffe&oe=5EF8E9F8" class="w-100">
-        </div>
-        <div class="col-4">
-            <img src="https://instagram.fist4-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/c55.0.969.969a/s640x640/66645033_104370810817547_8701499162627471864_n.jpg?_nc_ht=instagram.fist4-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=iOvJN44EsxYAX_O-Q7h&oh=c32d52f6cb585f05ba09bcd120777ffe&oe=5EF8E9F8" class="w-100">
-        </div>
-        <div class="col-4">
-            <img src="https://instagram.fist4-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/c55.0.969.969a/s640x640/66645033_104370810817547_8701499162627471864_n.jpg?_nc_ht=instagram.fist4-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=iOvJN44EsxYAX_O-Q7h&oh=c32d52f6cb585f05ba09bcd120777ffe&oe=5EF8E9F8" class="w-100">
-        </div>
+    <div class="row pt-5">
+        @foreach($user->posts as $post)
+            <div class="col-4 pb-4">
+                <a href="/posts/{{ $post->id }}">
+                    <img src="/storage/{{ $post->image}}" class="w-100">
+                </a>
+            </div>
+        @endforeach
     </div>
 </div>
 @endsection
